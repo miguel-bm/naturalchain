@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "naturalchain"
+version = "0.1.0"
+description = ""
+authors = ["Miguel Blanco Marcos <miguel.blanco.marcos@gmail.com>"]
+readme = "README.md"
+packages = [{include = "naturalchain"}]
+
+[tool.poetry.dependencies]
+python = "~3.9"
+eth-brownie = "^1.19.3"
+langchain = "^0.0.160"
+openai = "^0.27.6"
+python-decouple = "^3.8"
+
+
+[tool.poetry.group.dev.dependencies]
+ipynb = "^0.5.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
