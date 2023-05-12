@@ -1,4 +1,5 @@
 import argparse
+from naturalchain.agents.default import naturalchain_agent
 
 
 def main():
@@ -12,7 +13,8 @@ def main():
 
     args = parser.parse_args()
     query: str = args.query
-    print(f"Your query: {query}")
+    response = naturalchain_agent.run(query)
+    print(response)
 
 
 if __name__ == "__main__":
