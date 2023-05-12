@@ -13,10 +13,12 @@ langchain = "^0.0.160"
 openai = "^0.27.6"
 python-decouple = "^3.8"
 
-
 [tool.poetry.group.dev.dependencies]
 ipynb = "^0.5.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+naturalchain = "naturalchain.cli.main:main"
