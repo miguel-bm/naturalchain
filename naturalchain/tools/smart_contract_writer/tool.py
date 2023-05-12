@@ -21,7 +21,13 @@ from naturalchain.utils import (
 )
 
 SYSTEM_MESSAGE = "You are a world class smart contract developer that creates EVM-compatible Solidity code given a description of a desired Smart Contract."
-HUMAN_MESSAGE_TEMPLATE = "Please write the code for a smart contract in Solidity that conforms to the following description:\n {description} \n\nOutput a single code block within backticks containing the Solidity code."
+HUMAN_MESSAGE_TEMPLATE = (
+    "Please write the code for a smart contract in Solidity that conforms to the following description. "
+    "Use Open Zeppelin libraries if appropriate. Comment the contract using natspec. "
+    "Description:\n"
+    "{description}\n\n"
+    "Output a single code block within backticks containing the Solidity code."
+)
 
 
 smart_contract_writer_chain = LLMChain(
