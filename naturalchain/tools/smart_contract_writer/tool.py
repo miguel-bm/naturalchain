@@ -22,8 +22,8 @@ from naturalchain.utils import (
 
 SYSTEM_MESSAGE = "You are a world class smart contract developer that creates EVM-compatible Solidity code given a description of a desired Smart Contract."
 HUMAN_MESSAGE_TEMPLATE = (
-    "Please write the code for a smart contract in Solidity that conforms to the following description. "
-    "Use Open Zeppelin libraries if appropriate. Comment the contract using natspec. "
+    "Please write the code for a smart contract in Solidity 0.8.19 that conforms to the following description. "
+    "Use Open Zeppelin libraries if appropriate. Comment the contract using natspec. Do not NOT use any constructor arguments. "
     "Description:\n"
     "{description}\n\n"
     "Output a single code block within backticks containing the Solidity code."

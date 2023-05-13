@@ -45,11 +45,21 @@ INFURA_API_KEY = config("INFURA_API_KEY")
 
 NETWORK_RPC_ENDPOINTS = {
     "ethereum_mainnet": f"https://mainnet.infura.io/v3/{INFURA_API_KEY}",
+    "ethereum_sepolia": f"https://sepolia.infura.io/v3/{INFURA_API_KEY}",
     "near_mainnet": f"https://near-mainnet.infura.io/v3/{INFURA_API_KEY}",
     "avalanche_mainnet": f"https://avalanche-mainnet.infura.io/v3/{INFURA_API_KEY}",
+    "polygon_mainnet": f"https://polygon-mainnet.infura.io/v3/{INFURA_API_KEY}",
+    "polygon_mumbai": f"https://polygon-mumbai.infura.io/v3/{INFURA_API_KEY}",
 }
 
-NETWORKS = Literal["ethereum_mainnet", "near_mainnet", "avalanche_mainnet"]
+NETWORKS = Literal[
+    "ethereum_mainnet",
+    "ethereum_sepolia",
+    "near_mainnet",
+    "avalanche_mainnet",
+    "polygon_mainnet",
+    "polygon_mumbai",
+]
 
 
 def get_web3(network: NETWORKS) -> Web3:
