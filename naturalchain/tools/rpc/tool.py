@@ -1,17 +1,24 @@
 import json
 import re
-from typing import Optional, Union
+from typing import Optional, Type
 
 from langchain.callbacks.manager import CallbackManagerForToolRun
 from langchain.tools import BaseTool
+from pydantic import BaseModel, Field
 from web3 import Web3
 
 from naturalchain.utils import NETWORKS, camel_to_snake, get_web3
 
 
+class RPCToolInput(BaseModel):
+    network: NETWORKS = Field(description="Network to use for the RPC.")
+    payload: str = Field(description="Payload for the RPC in json format.")
+
+
 class RPCTool(BaseTool):
     name = "RPC"
-    description = "Useful for getting data with RPC. This does not give you information about address, name, symbol, token_supply or price"
+    description = "Useful for getting data with RPC. This does NOT give you information about symbol, token supply, or price."
+    args_schema: Type[BaseModel] = RPCToolInput
 
     def _get_method(self, payload: dict) -> tuple[str, str]:
         # The payload method should be something like "eth_call" or "eth_getBalance"
@@ -38,7 +45,7 @@ class RPCTool(BaseTool):
     def _run(
         self,
         network: NETWORKS,
-        payload: Union[str, dict],
+        payload: str,
         run_manager: Optional[CallbackManagerForToolRun] = None,
     ) -> str:
         if isinstance(payload, str):
