@@ -2,9 +2,10 @@ import json
 import re
 from enum import Enum
 from functools import lru_cache
-from typing import Literal, Union
+from typing import Literal, Optional, Union
 
 from decouple import config
+from langchain.callbacks.manager import CallbackManagerForToolRun
 from langchain.tools import BaseTool
 from pydantic import BaseModel, Field
 from web3 import Web3
@@ -75,14 +76,21 @@ class RPCTool(BaseTool):
         response = getattr(getattr(web3, method_1), method_2)(params[0])
         return response
 
-    def _run(self, network: NETWORK, payload: Union[str, dict]) -> str:
+    def _run(
+        self,
+        network: NETWORK,
+        payload: Union[str, dict],
+        run_manager: Optional[CallbackManagerForToolRun] = None,
+    ) -> str:
         if isinstance(payload, str):
-            payload: dict = json.loads(payload)
+            payload_dict: dict = json.loads(payload)
+        else:
+            payload_dict = payload
         # method = self._get_method(payload)
 
         web3 = self._get_web3(network)
 
-        return self._make_rpc_call(web3, payload)
+        return self._make_rpc_call(web3, payload_dict)
 
         # if method == ("eth", "call"):
         #     return self._make_eth_call(web3, payload)

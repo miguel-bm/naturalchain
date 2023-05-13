@@ -42,15 +42,15 @@ def is_proxy(address):
         return parsed_address
 
 
-class TrialToolSchema(BaseModel):
+class IdentifyContractToolSchema(BaseModel):
     address: str = Field(description="The address to the contract to be identified")
 
 
-class IdentifyTool(BaseTool):
-    name = "Identify contract"
-    description = "Useful to identify a contract in the EVM blockchain. Return whether is a contract or not, and if it is a proxy, returns its implementation address"
+class IdentifyContractTool(BaseTool):
+    name = "IdentifyContract"
+    description = "Useful to identify a contract in the EVM blockchain. Given an address, returns whether it is a contract or not. If it is a proxy, returns its implementation address"
 
-    args_schema: Type[BaseModel] = TrialToolSchema
+    args_schema: Type[BaseModel] = IdentifyContractToolSchema
 
     def _run(self, address: str) -> object:
         isContract = is_contract(address)

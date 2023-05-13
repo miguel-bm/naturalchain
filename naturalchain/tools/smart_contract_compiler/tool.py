@@ -50,7 +50,7 @@ class SmartContractCompilerToolInput(BaseModel):
 
 class SmartContractCompilerTool(BaseTool):
     name = "SmartContractCompiler"
-    description = "Useful for compiling EVM-compatible smart contracts a path to a .sol file. Returns the path to the .bin file."
+    description = "Useful for compiling EVM-compatible smart contracts a path to a .sol file. Returns the path to a file containing the bytecode."
     args_schema: Type[BaseModel] = SmartContractCompilerToolInput
 
     def _run(
