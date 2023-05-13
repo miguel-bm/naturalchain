@@ -7,13 +7,24 @@ from langchain.callbacks.manager import CallbackManagerForToolRun
 from langchain.tools import BaseTool
 
 from naturalchain.utils import CMC_NETWORK_NAMES, NETWORKS, get_web3
+from pydantic import BaseModel, Field
+from typing import Type
 
 COIN_MARKET_CAP_API_KEY = config("COIN_MARKET_CAP_API_KEY")
+
+
+class CoinInformationRetrieverToolInput(BaseModel):
+    symbol: str = Field(description="Symbol of the coin in coinmarketcap.")
+    network: Optional[NETWORKS] = Field(
+        description="Optional, network of the coin.",
+        default="ethereum_mainnet",
+    )
 
 
 class CoinInformationRetrieverTool(BaseTool):
     name = "TokenInformation"
     description = "Useful for retrieving current token information. Returns a json object with address, name, symbol, token_supply, price"
+    args_schema: Type[BaseModel] = CoinInformationRetrieverToolInput
 
     @staticmethod
     def _get_coin_address(network: NETWORKS, symbol: str):

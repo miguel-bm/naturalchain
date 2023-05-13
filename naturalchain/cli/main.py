@@ -78,8 +78,8 @@ def get_agent(
     return agent
 
 
-@app.command()
-def main(
+@app.command(name="query")
+def query_command(
     query: Annotated[
         str, typer.Argument(..., help="Your query or task for the NaturalChain agent")
     ],
@@ -111,6 +111,44 @@ def main(
         agent_instance = get_agent(agent, verbose, model_name, temperature=temperature)
         response = agent_instance.run(query)
         typer.echo(response)
+    except Exception as e:
+        console.print_exception(max_frames=0)
+
+
+@app.command(name="chat")
+def chat_command(
+    agent: Annotated[
+        StructuredChatAgent,
+        typer.Option(
+            help="Specify which agent to use (default or smart_contract)",
+        ),
+    ] = StructuredChatAgent.full,
+    model_name: Annotated[
+        str,
+        typer.Option(
+            help="Specify which model to use (gpt-3.5-turbo or gpt-4)",
+        ),
+    ] = "gpt-3.5-turbo",
+    temperature: Annotated[
+        float,
+        typer.Option(
+            help="Specify the temperature for the model (default 0.0)",
+        ),
+    ] = 0.0,
+    verbose: Annotated[bool, typer.Option(help="Display verbose output")] = False,
+) -> None:
+    console = Console()
+    typer.echo(
+        "You are now chatting with the NaturalChain agent. Type 'exit' to finish the chat."
+    )
+    agent_instance = get_agent(agent, verbose, model_name, temperature=temperature)
+    try:
+        while True:
+            query = typer.prompt("You")
+            if query == "exit":
+                break
+            response = agent_instance.run(query)
+            typer.echo(f"NaturalChain: {response}")
     except Exception as e:
         console.print_exception(max_frames=0)
 

@@ -12,7 +12,7 @@
 [x] Coinmarketcap price tool
 [] TheGraph Tool for their API
 [] Complete README.md
-[]
+[] Deploy on all the chains
 
 
 ## Ideas extra
