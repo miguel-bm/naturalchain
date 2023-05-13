@@ -42,7 +42,7 @@ class UniswapGraphTool(BaseTool):
            jsonResponse = response.json()
            if 'errors' in jsonResponse:
                 return  jsonResponse['errors'][0]['message']
-           # return  "The error of the last query was" + jsonResponse['errors'][0]['message'] + "\n Try to query properly the graph taking in account the graph schema"
+                #return  "The error of the last query was" + jsonResponse['errors'][0]['message'] + "\n Try to query properly the graph taking in account the graph schema"
            else:
               return jsonResponse
         else:

@@ -19,3 +19,17 @@
 
 - Usar la API de Etherscan para pedir ERC20 transfers, las transacciones que ha hecho una cuenta...
 - Herramienta para AirStack
+
+
+## Example prompts:
+
+
+- Deploy Smart contracts
+    - Create a nft smart contract with a preminted nft to the deployer address on sepolia network
+
+- Querying subgraph
+    - Can you provide me the top 10 paris of uniswap?
+    - Can you provide me the top 5 uniswap pairs that has DAI on it
+    - Show top pairs of balancer
+
+- Leverage the full JSON-rpc
