@@ -1,15 +1,13 @@
 from typing import Type
 
-from decouple import config
 from langchain.tools import BaseTool
 from pydantic import BaseModel, Field
 from web3 import Web3
 
-INFURA_API_KEY = config("INFURA_API_KEY")
-w3 = Web3(Web3.HTTPProvider(f"https://mainnet.infura.io/v3/{INFURA_API_KEY}"))
+from naturalchain.utils import NETWORKS, get_web3
 
 
-def is_contract(address):
+def is_contract(w3: Web3, address: str):
     # Convert the address to a checksum address to ensure compatibility
     checksum_address = w3.toChecksumAddress(address)
 
@@ -23,7 +21,7 @@ def is_contract(address):
         return False
 
 
-def is_proxy(address):
+def is_proxy(w3: Web3, address: str):
     # Convert the address to a checksum address to ensure compatibility
     checksum_address = w3.toChecksumAddress(address)
 
@@ -43,6 +41,7 @@ def is_proxy(address):
 
 
 class IdentifyContractToolSchema(BaseModel):
+    network: NETWORKS = Field(description="The network to use")
     address: str = Field(description="The address to the contract to be identified")
 
 
@@ -52,12 +51,14 @@ class IdentifyContractTool(BaseTool):
 
     args_schema: Type[BaseModel] = IdentifyContractToolSchema
 
-    def _run(self, address: str) -> object:
-        isContract = is_contract(address)
+    def _run(self, network: NETWORKS, address: str) -> object:
+        web3 = get_web3(network)
+
+        isContract = is_contract(web3, address)
 
         implementationAddress = "0x"
         if isContract:
-            implementationAddress = is_proxy(address)
+            implementationAddress = is_proxy(web3, address)
             if implementationAddress == "0x":
                 return "The address is a contract"
             else:
