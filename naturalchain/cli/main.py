@@ -3,42 +3,79 @@ import enum
 import click
 import typer
 from langchain.agents import AgentExecutor
+from rich.console import Console
 from rich.traceback import install
 from typing_extensions import Annotated
 
-from naturalchain.agents.default import get_naturalchain_agent
-from naturalchain.agents.smart_contract_agent import get_smart_contract_agent
-from naturalchain.agents.information_retrieval import get_information_retrieval_agent
-from rich.console import Console
+from naturalchain.agents.structured_chat import get_structured_chat_agent_from_tools
+from naturalchain.tools import (
+    CoinInformationRetrieverTool,
+    IdentifyContractTool,
+    PythonCalculatorTool,
+    RPCTool,
+    SignTransactionTool,
+    SmartContractCompilerTool,
+    SmartContractDeployerTool,
+    SmartContractWriterTool,
+)
 
 install(suppress=[click])
 app = typer.Typer()
 
 
-class Agent(str, enum.Enum):
-    default = "default"
+class StructuredChatAgent(str, enum.Enum):
+    full = "full"
     smart_contract = "smart-contract"
     information_retrieval = "information-retrieval"
 
 
-def get_agent(
-    agent: Agent, verbose: bool, model_name: str, temperature: float
-) -> AgentExecutor:
-    if agent == Agent.default:
-        return get_naturalchain_agent(
-            verbose=verbose, model_name=model_name, temperature=temperature
-        )
-    elif agent == Agent.smart_contract:
-        return get_smart_contract_agent(
-            verbose=verbose, model_name=model_name, temperature=temperature
-        )
-    elif agent == Agent.information_retrieval:
-        return get_information_retrieval_agent(
-            verbose=verbose, model_name=model_name, temperature=temperature
-        )
+FULL_TOOLSET = [
+    PythonCalculatorTool(),
+    RPCTool(),
+    IdentifyContractTool(),
+    SignTransactionTool(),
+    CoinInformationRetrieverTool(),
+    SmartContractWriterTool(),
+    SmartContractCompilerTool(),
+    SmartContractDeployerTool(),
+]
 
-    else:
-        raise ValueError(f"Invalid agent: {agent}")
+SMART_CONTRACT_TOOLSET = [
+    SmartContractWriterTool(),
+    SmartContractCompilerTool(),
+    SmartContractDeployerTool(),
+]
+
+RETRIEVAL_TOOLSET = [
+    PythonCalculatorTool(),
+    RPCTool(),
+    IdentifyContractTool(),
+    CoinInformationRetrieverTool(),
+]
+
+TOOLSET_MAP = {
+    StructuredChatAgent.full: FULL_TOOLSET,
+    StructuredChatAgent.smart_contract: SMART_CONTRACT_TOOLSET,
+    StructuredChatAgent.information_retrieval: RETRIEVAL_TOOLSET,
+}
+
+
+def get_agent(
+    agent_type: StructuredChatAgent,
+    verbose: bool,
+    model_name: str,
+    temperature: float,
+) -> AgentExecutor:
+    if agent_type not in StructuredChatAgent:
+        raise ValueError(f"Invalid agent type: {agent_type}")
+    toolset = TOOLSET_MAP[agent_type]
+    agent = get_structured_chat_agent_from_tools(
+        tools=toolset,
+        verbose=verbose,
+        model_name=model_name,
+        temperature=temperature,
+    )
+    return agent
 
 
 @app.command()
@@ -47,11 +84,11 @@ def main(
         str, typer.Argument(..., help="Your query or task for the NaturalChain agent")
     ],
     agent: Annotated[
-        Agent,
+        StructuredChatAgent,
         typer.Option(
             help="Specify which agent to use (default or smart_contract)",
         ),
-    ] = Agent.default,
+    ] = StructuredChatAgent.full,
     model_name: Annotated[
         str,
         typer.Option(
