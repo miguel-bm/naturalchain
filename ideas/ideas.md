@@ -7,9 +7,9 @@
         - Nonce: eth_getTransactionCount
         - Bytecode: eth_getCode
         - Balance: eth_getBalance
-    - Given address say wheather or not is a proxy;
+    - Given address say whether or not is a proxy;
         - eth_getStorageAt: `bytes32 internal constant _IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;`   
-    - GIven an address and a event (submitDeposit..), sum all the balances to get the total value birdged to that network
+    - Given an address and a event (submitDeposit..), sum all the balances to get the total value birdged to that network
 - Smart contract deployment:
     - ERC721 (NFT) : 
         - Make an nft contract, supply is limited to 1000 and can only be minted paying a 0.01 ethers. 
