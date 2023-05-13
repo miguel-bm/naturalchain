@@ -17,11 +17,13 @@ def extract_first_code_block(text: str) -> str:
 
 
 def preprocess_solidity_code(code: str) -> str:
-    code.replace(
+    code = code.replace(
         "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/",
         "@openzeppelin",
     )
-    return code.replace("pragma solidity ^0.8.0;", "pragma solidity 0.8.19;")
+    code = code.replace("pragma solidity 0.8.9;", "pragma solidity 0.8.19;")
+    code = code.replace("pragma solidity ^0.8.0;", "pragma solidity 0.8.19;")
+    return code
 
 
 def save_to_text_file(text: str, file_location: Path, file_name: str):
