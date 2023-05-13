@@ -1,14 +1,13 @@
 import json
 import re
-from enum import Enum
-from functools import lru_cache
 from typing import Literal, Optional, Union
 
 from decouple import config
 from langchain.callbacks.manager import CallbackManagerForToolRun
 from langchain.tools import BaseTool
-from pydantic import BaseModel, Field
 from web3 import Web3
+
+from naturalchain.utils import NETWORKS, camel_to_snake, get_web3
 
 INFURA_API_KEY = config("INFURA_API_KEY")
 
@@ -17,12 +16,6 @@ NETWORK = Literal[
     "near_mainnet",
     "avalanche_mainnet",
 ]
-
-
-def camel_to_snake(string):
-    # Insert an underscore before any capital letters and convert to lowercase
-    snake_case = re.sub(r"(?<!^)(?=[A-Z])", "_", string).lower()
-    return snake_case
 
 
 class RPCTool(BaseTool):
@@ -54,21 +47,6 @@ class RPCTool(BaseTool):
     def _get_params(self, payload: dict) -> dict:
         return payload["params"]
 
-    # def _make_eth_call(self, web3: Web3, payload: dict) -> str:
-    #     params = self._get_params(payload)
-
-    #     response = web3.eth.call(params[0])
-
-    #     print(response)
-    #     return response.hex()
-
-    # def _make_generic_call(self, web3: Web3, payload: dict) -> str:
-    #     method_1, method_2 = self._get_method(payload)
-    #     params = self._get_params(payload)
-
-    #     response = getattr(getattr(web3, method_1), method_2)(params[0])
-    #     return response
-
     def _make_rpc_call(self, web3: Web3, payload: dict) -> str:
         method_1, method_2 = self._get_method(payload)
         params = self._get_params(payload)
@@ -78,7 +56,7 @@ class RPCTool(BaseTool):
 
     def _run(
         self,
-        network: NETWORK,
+        network: NETWORKS,  # type: ignore
         payload: Union[str, dict],
         run_manager: Optional[CallbackManagerForToolRun] = None,
     ) -> str:
@@ -86,16 +64,10 @@ class RPCTool(BaseTool):
             payload_dict: dict = json.loads(payload)
         else:
             payload_dict = payload
-        # method = self._get_method(payload)
 
-        web3 = self._get_web3(network)
+        web3 = get_web3(network)
 
         return self._make_rpc_call(web3, payload_dict)
-
-        # if method == ("eth", "call"):
-        #     return self._make_eth_call(web3, payload)
-        # else:
-        #     return self._make_generic_call(web3, payload)
 
     async def _arun(self, address: str) -> str:
         raise NotImplementedError

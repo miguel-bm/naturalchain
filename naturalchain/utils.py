@@ -1,6 +1,10 @@
 import re
 from datetime import datetime
 from pathlib import Path
+from typing import Literal
+
+from decouple import config
+from web3 import Web3
 
 
 def extract_first_code_block(text: str) -> str:
@@ -29,3 +33,28 @@ def save_to_text_file(text: str, file_location: Path, file_name: str):
 
 def get_datetime_string() -> str:
     return datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+
+
+def camel_to_snake(string):
+    # Insert an underscore before any capital letters and convert to lowercase
+    snake_case = re.sub(r"(?<!^)(?=[A-Z])", "_", string).lower()
+    return snake_case
+
+
+INFURA_API_KEY = config("INFURA_API_KEY")
+
+NETWORK_RPC_ENDPOINTS = {
+    "ethereum_mainnet": f"https://mainnet.infura.io/v3/{INFURA_API_KEY}",
+    "near_mainnet": f"https://near-mainnet.infura.io/v3/{INFURA_API_KEY}",
+    "avalanche_mainnet": f"https://avalanche-mainnet.infura.io/v3/{INFURA_API_KEY}",
+}
+
+NETWORKS = Literal[tuple(NETWORK_RPC_ENDPOINTS.keys())]  # type: ignore
+
+
+def get_web3(network: str) -> Web3:
+    try:
+        endpoint = NETWORK_RPC_ENDPOINTS[network]
+        return Web3(Web3.HTTPProvider(endpoint))
+    except KeyError:
+        raise ValueError(f"Unsupported network: {network}")
