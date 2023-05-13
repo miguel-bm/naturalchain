@@ -3,6 +3,9 @@ from langchain.agents import AgentType, initialize_agent
 from langchain.chat_models import ChatOpenAI
 
 from naturalchain.tools.calculator.tool import PythonCalculatorTool
+from naturalchain.tools.coin_information_retriever.tool import (
+    CoinInformationRetrieverTool,
+)
 from naturalchain.tools.rpc.tool import RPCTool
 from naturalchain.tools.sign_tx.tool import SignTransactionTool
 from naturalchain.tools.smart_contract_compiler.tool import SmartContractCompilerTool
@@ -27,6 +30,7 @@ def get_naturalchain_agent(
             RPCTool(),
             IdentifyContractTool(),
             SignTransactionTool(),
+            CoinInformationRetrieverTool(),
         ],
         llm=ChatOpenAI(temperature=temperature, openai_api_key=OPENAI_API_KEY, model_name=model_name),  # type: ignore
         agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
