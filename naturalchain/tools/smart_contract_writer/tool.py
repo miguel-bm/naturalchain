@@ -61,8 +61,11 @@ class SmartContractWriterTool(BaseTool):
         chain_result = smart_contract_writer_chain.run(description)
         code_block = extract_first_code_block(chain_result)
         code_block = preprocess_solidity_code(code_block)
+
         output_path = Path("smart_contracts")
+        output_path.mkdir(exist_ok=True, parents=True)
         file_name = f"smart_contract_{get_datetime_string()}.sol"
+
         save_to_text_file(code_block, output_path, file_name)
         absolute_path_str = str((output_path / file_name).absolute())
         return absolute_path_str
