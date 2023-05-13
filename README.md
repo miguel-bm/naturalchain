@@ -1,16 +1,17 @@
 # NaturalChain
 
 ## To-dos 
-[] Choose Mainnet, Testnet, Polygon... (@Alvaro)
+[x] Choose Mainnet, Testnet, Polygon... (@Alvaro)
 [x] Full RPC tool (@Alvaro)
 [x] List of cool test cases for our RPC agent (@Jesus)
 [x] Tool for creating smart contracts (@Miguel)
 [x] CLI for our agent 
 [x] Tool for compiling smart contracts
-[] Tool for deploying smart contracts
+[x] Tool for deploying smart contracts
+[] Add all networks we want to deploy to
+[] Coinmarketcap price tool
 [] Crypto address book using Etherscan API
 [] TheGraph Tool for their API
-[] Coingecko price tool
 
 ## Ideas extra
 
