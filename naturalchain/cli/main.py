@@ -17,6 +17,7 @@ from naturalchain.tools import (
     SmartContractCompilerTool,
     SmartContractDeployerTool,
     SmartContractWriterTool,
+    UniswapGraphTool,
 )
 
 install(suppress=[click])
@@ -29,16 +30,17 @@ class StructuredChatAgent(str, enum.Enum):
     information_retrieval = "information-retrieval"
 
 
-FULL_TOOLSET = [
-    PythonCalculatorTool(),
-    RPCTool(),
-    IdentifyContractTool(),
-    SignTransactionTool(),
-    CoinInformationRetrieverTool(),
-    SmartContractWriterTool(),
-    SmartContractCompilerTool(),
-    SmartContractDeployerTool(),
-]
+# FULL_TOOLSET = [
+#     PythonCalculatorTool(),
+#     RPCTool(),
+#     IdentifyContractTool(),
+#     SignTransactionTool(),
+#     CoinInformationRetrieverTool(),
+#     SmartContractWriterTool(),
+#     SmartContractCompilerTool(),
+#     SmartContractDeployerTool(),
+#     UniswapGraphTool()
+# ]
 
 SMART_CONTRACT_TOOLSET = [
     SmartContractWriterTool(),
@@ -51,8 +53,13 @@ RETRIEVAL_TOOLSET = [
     RPCTool(),
     IdentifyContractTool(),
     CoinInformationRetrieverTool(),
+    UniswapGraphTool()
 ]
-
+FULL_TOOLSET = [
+    *SMART_CONTRACT_TOOLSET,
+    *RETRIEVAL_TOOLSET,
+     SignTransactionTool(),
+]
 TOOLSET_MAP = {
     StructuredChatAgent.full: FULL_TOOLSET,
     StructuredChatAgent.smart_contract: SMART_CONTRACT_TOOLSET,
