@@ -5,6 +5,7 @@ from langchain.chat_models import ChatOpenAI
 from naturalchain.tools.calculator.tool import PythonCalculatorTool
 from naturalchain.tools.rpc.tool import RPCTool
 from naturalchain.tools.smart_contract_writer.tool import SmartContractWriterTool
+from naturalchain.tools.smart_contract_compiler.tool import SmartContractCompilerTool
 
 OPENAI_API_KEY = config("OPENAI_API_KEY")
 
@@ -12,6 +13,7 @@ OPENAI_API_KEY = config("OPENAI_API_KEY")
 naturalchain_agent = initialize_agent(
     tools=[
         SmartContractWriterTool(),
+        SmartContractCompilerTool(),
         PythonCalculatorTool(),
         RPCTool(),
     ],
