@@ -12,11 +12,11 @@
     - GIven an address and a event (submitDeposit..), sum all the balances to get the total value birdged to that network
 - Smart contract deployment:
     - ERC721 (NFT) : 
-        - You are a professional smart contract developer. Use open zeppelin libraries. Comment the contract using natspec. Make an nft contract, supply is limited to 1000 and can only be minted paying a 0.01 ethers. 
+        - Make an nft contract, supply is limited to 1000 and can only be minted paying a 0.01 ethers. 
     - ERC20: 
-        - You are a professional smart contract developer. Use Open zeppelin libraries. Comment the contract using natspec. Make an erc20 contract, supply is limited to 1 Billion. Implements permit functionality. There is a minter address that can mint tokens.
+        - Write and deploy a smart contract on ethereum sepolia testnet for an erc20 where supply is limited to 1 Billion. Implements permit functionality. There is a minter address that can mint tokens. Give me the deployed contrac address
     - Charity:
-        - You are a professional smart contract developer. Use Open zeppelin libraries. Comment the contract using natspec. Create a smart contract that accepts donations into registered projects. Everyone can register a project. Every project registered will have an ID and an IPFS link to theis project metadata and a recipient address. Contract tracks the donated amount for every project. Withdraw method to retrieve the donated amount
+        - Create a smart contract that accepts donations into registered projects. Everyone can register a project. Every project registered will have an ID and an IPFS link to theis project metadata and a recipient address. Contract tracks the donated amount for every project. Withdraw method to retrieve the donated amount
     - Oracle: 
 
 - Guess the contract?: Given an address, check the events --> get the transactions that go to them and try to guess the contract giving that information ( can check the signatures of data (check 4 byte directory api), or logs signatures aswell ( https://github.com/otterscan/topic0))
