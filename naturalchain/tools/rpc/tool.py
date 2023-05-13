@@ -31,11 +31,13 @@ class RPCTool(BaseTool):
         params = self._get_params(payload)
 
         response = getattr(getattr(web3, method_1), method_2)(params[0])
+        if isinstance(response, bytes):
+            return response.hex()
         return response
 
     def _run(
         self,
-        network: NETWORKS,  # type: ignore
+        network: NETWORKS,
         payload: Union[str, dict],
         run_manager: Optional[CallbackManagerForToolRun] = None,
     ) -> str:
