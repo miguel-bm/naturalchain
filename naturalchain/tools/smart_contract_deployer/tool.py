@@ -56,6 +56,8 @@ class SmartContractDeployerTool(BaseTool):
 
         # Get nonce
         nonce = w3.eth.getTransactionCount(public_address)
+        # Get gas price
+        gas_price = w3.eth.gasPrice
 
         # Prepare the transaction
         transaction = {
@@ -64,13 +66,20 @@ class SmartContractDeployerTool(BaseTool):
             "gasPrice": w3.eth.gasPrice,
             "data": f"0x{bytecode}",
             "nonce": nonce,
+            "chainId": w3.eth.chainId,
         }
 
         # Sign the transaction
         signed_tx = w3.eth.account.signTransaction(transaction, private_key)
 
         # Send the transaction
-        transaction_hash = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        try:
+            transaction_hash = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        except ValueError as e:
+            required_token = gas_estimate * gas_price
+            raise ValueError(
+                f"{e}. This operation required token: {required_token / 1e18}"
+            )
 
         # Wait for the transaction receipt
         transaction_receipt = w3.eth.waitForTransactionReceipt(transaction_hash)

@@ -13,6 +13,7 @@ langchain = "^0.0.160"
 openai = "^0.27.6"
 python-decouple = "^3.8"
 py-solc-x = "^1.1.1"
+typer = {extras = ["all"], version = "^0.9.0"}
 
 [tool.poetry.group.dev.dependencies]
 ipynb = "^0.5.1"
@@ -22,4 +23,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-naturalchain = "naturalchain.cli.main:main"
+naturalchain = "naturalchain.cli.main:app"

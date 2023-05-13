@@ -13,17 +13,22 @@ from naturalchain.tools.sign_tx.tool import SignTransactionTool
 OPENAI_API_KEY = config("OPENAI_API_KEY")
 
 
-naturalchain_agent = initialize_agent(
-    tools=[
-        SmartContractWriterTool(),
-        SmartContractCompilerTool(),
-        SmartContractDeployerTool(),
-        PythonCalculatorTool(),
-        RPCTool(),
-        IdentifyContractTool(),
-        SignTransactionTool()
-    ],
-    llm=ChatOpenAI(temperature=0, openai_api_key=OPENAI_API_KEY),  # type: ignore
-    agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
-    verbose=True,
-)
+def get_naturalchain_agent(
+    verbose: bool = False,
+    model_name: str = "gpt-3.5-turbo",
+    temperature: float = 0.0,
+):
+    return initialize_agent(
+        tools=[
+            SmartContractWriterTool(),
+            SmartContractCompilerTool(),
+            SmartContractDeployerTool(),
+            PythonCalculatorTool(),
+            RPCTool(),
+            IdentifyContractTool(),
+            SignTransactionTool(),
+        ],
+        llm=ChatOpenAI(temperature=temperature, openai_api_key=OPENAI_API_KEY, model_name=model_name),  # type: ignore
+        agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
+        verbose=verbose,
+    )
