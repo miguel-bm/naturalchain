@@ -13,6 +13,10 @@ def extract_first_code_block(text: str) -> str:
 
 
 def preprocess_solidity_code(code: str) -> str:
+    code.replace(
+        "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/",
+        "@openzeppelin",
+    )
     return code.replace("pragma solidity ^0.8.0;", "pragma solidity 0.8.19;")
 
 
