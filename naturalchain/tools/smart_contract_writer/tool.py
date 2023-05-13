@@ -17,7 +17,6 @@ from naturalchain.utils import (
     extract_first_code_block,
     preprocess_solidity_code,
     save_to_text_file,
-    get_datetime_string,
 )
 
 SYSTEM_MESSAGE = "You are a world class smart contract developer that creates EVM-compatible Solidity code given a description of a desired Smart Contract."
