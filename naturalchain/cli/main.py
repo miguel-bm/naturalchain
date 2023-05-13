@@ -14,7 +14,7 @@ def main():
 
     args = parser.parse_args()
     query: str = args.query
-    response = smart_contract_agent.run(query)
+    response = naturalchain_agent.run(query)
     print(response)
 
 
