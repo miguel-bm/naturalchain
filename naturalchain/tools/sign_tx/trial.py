@@ -27,9 +27,9 @@ if __name__ == "__main__":
     token_amount = 10
 
     erc20_token_address = "0xde9e5f071cc331690fd776d224024152302afa22"
-    #question = f"Transfer {token_amount} tokens to {recipientAddress}, using this erc20 contract: ${erc20_token_address} on Ethereum mainnet. Give me the resulting transaction hash"
-    question = f"Send a transaction of {ether_amount} ethers to {recipientAddress} on Ethereum mainnet. Give me the resulting transaction hash"
-    #question = f"Use mint method to mint {token_amount} tokens to {recipientAddress}, using this erc20 contract: ${erc20_token_address} on Ethereum mainnet. Give me the resulting transaction hash"
+    question = f"Transfer {token_amount} tokens to {recipientAddress}, using this erc20 contract: ${erc20_token_address} on Sepolia. Give me the resulting transaction hash"
+    #question = f"Send a transaction of {ether_amount} ethers to {recipientAddress} on Sepolia. Give me the resulting transaction hash"
+    ### D:question = f"Use mint method to mint {token_amount} tokens to {recipientAddress}, using this erc20 contract: ${erc20_token_address} on Ethereum mainnet. Give me the resulting transaction hash"
 
     response = agent.run(question)
 
