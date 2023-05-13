@@ -8,10 +8,12 @@
 [x] CLI for our agent 
 [x] Tool for compiling smart contracts
 [x] Tool for deploying smart contracts
-[] Add all networks we want to deploy to
-[] Coinmarketcap price tool
-[] Crypto address book using Etherscan API
+[x] Add all networks we want to deploy to
+[x] Coinmarketcap price tool
 [] TheGraph Tool for their API
+[] Complete README.md
+[]
+
 
 ## Ideas extra
 
