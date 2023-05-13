@@ -7,6 +7,7 @@ from naturalchain.tools.rpc.tool import RPCTool
 from naturalchain.tools.smart_contract_writer.tool import SmartContractWriterTool
 from naturalchain.tools.smart_contract_compiler.tool import SmartContractCompilerTool
 from naturalchain.tools.smart_contract_identifier.tool import IdentifyContractTool
+from naturalchain.tools.smart_contract_deployer.tool import SmartContractDeployerTool
 
 OPENAI_API_KEY = config("OPENAI_API_KEY")
 
@@ -15,6 +16,7 @@ naturalchain_agent = initialize_agent(
     tools=[
         SmartContractWriterTool(),
         SmartContractCompilerTool(),
+        SmartContractDeployerTool(),
         PythonCalculatorTool(),
         RPCTool(),
         IdentifyContractTool(),
