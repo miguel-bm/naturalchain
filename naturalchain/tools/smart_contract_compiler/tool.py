@@ -7,6 +7,7 @@ from langchain.callbacks.manager import CallbackManagerForToolRun
 from langchain.tools import BaseTool
 from pydantic import BaseModel, Field
 from typing import List, Dict
+from semantic_version import Version
 
 
 def get_remappings(
@@ -62,8 +63,9 @@ class SmartContractCompilerTool(BaseTool):
         home_path = Path.home()
         compiler_output = solcx.compile_files(
             [path_to_sol_file],
-            output_values=["abi", "bin-runtime", "bin"],
+            output_values=["abi", "bin"],
             import_remappings=get_remappings(["openzeppelin", "chainlink"]),
+            solc_version=Version("0.8.19"),
         )
 
         sol_file_name = Path(path_to_sol_file).name

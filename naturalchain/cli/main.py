@@ -1,5 +1,6 @@
 import argparse
 from naturalchain.agents.default import naturalchain_agent
+from naturalchain.agents.smart_contract_agent import smart_contract_agent
 
 
 def main():
@@ -13,7 +14,7 @@ def main():
 
     args = parser.parse_args()
     query: str = args.query
-    response = naturalchain_agent.run(query)
+    response = smart_contract_agent.run(query)
     print(response)
 
 

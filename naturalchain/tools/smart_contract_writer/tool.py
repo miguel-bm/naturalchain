@@ -31,7 +31,7 @@ HUMAN_MESSAGE_TEMPLATE = (
 
 
 smart_contract_writer_chain = LLMChain(
-    llm=ChatOpenAI(openai_api_key=config("OPENAI_API_KEY")),  # type: ignore
+    llm=ChatOpenAI(openai_api_key=config("OPENAI_API_KEY"), temperature=0.0),  # type: ignore
     prompt=ChatPromptTemplate.from_messages(
         [
             SystemMessagePromptTemplate.from_template(SYSTEM_MESSAGE),
@@ -42,6 +42,7 @@ smart_contract_writer_chain = LLMChain(
 
 
 class SmartContractWriterToolInput(BaseModel):
+    title: str = Field(description="A title for the smart contract, e.g. 'ERC20 Token'")
     description: str = Field(
         description="A detailed description of the smart contract, including its purpose, its functions, and its variables"
     )
@@ -49,22 +50,24 @@ class SmartContractWriterToolInput(BaseModel):
 
 class SmartContractWriterTool(BaseTool):
     name = "SmartContractWriter"
-    description = "Useful for writing EVM-compatible smart contracts given a description. Returns the path to the .sol file."
+    description = "Useful for writing EVM-compatible smart contracts given a title and description. Returns the path to the .sol file."
     args_schema: Type[BaseModel] = SmartContractWriterToolInput
 
     def _run(
         self,
+        title: str,
         description: str,
         run_manager: Optional[CallbackManagerForToolRun] = None,
     ) -> str:
         """Use the tool."""
-        chain_result = smart_contract_writer_chain.run(description)
+        chain_result = smart_contract_writer_chain.run(f"{title}\n{description}")
         code_block = extract_first_code_block(chain_result)
         code_block = preprocess_solidity_code(code_block)
 
         output_path = Path("smart_contracts")
         output_path.mkdir(exist_ok=True, parents=True)
-        file_name = f"smart_contract_{get_datetime_string()}.sol"
+        snake_case_title = title.lower().replace(" ", "_")
+        file_name = f"{snake_case_title}.sol"
 
         save_to_text_file(code_block, output_path, file_name)
         absolute_path_str = str((output_path / file_name).absolute())
