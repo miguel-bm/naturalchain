@@ -8,6 +8,7 @@ from typing_extensions import Annotated
 
 from naturalchain.agents.default import get_naturalchain_agent
 from naturalchain.agents.smart_contract_agent import get_smart_contract_agent
+from naturalchain.agents.information_retrieval import get_information_retrieval_agent
 from rich.console import Console
 
 install(suppress=[click])
@@ -17,6 +18,7 @@ app = typer.Typer()
 class Agent(str, enum.Enum):
     default = "default"
     smart_contract = "smart-contract"
+    information_retrieval = "information-retrieval"
 
 
 def get_agent(
@@ -30,6 +32,11 @@ def get_agent(
         return get_smart_contract_agent(
             verbose=verbose, model_name=model_name, temperature=temperature
         )
+    elif agent == Agent.information_retrieval:
+        return get_information_retrieval_agent(
+            verbose=verbose, model_name=model_name, temperature=temperature
+        )
+
     else:
         raise ValueError(f"Invalid agent: {agent}")
 
