@@ -71,8 +71,13 @@ class CoinInformationRetrieverTool(BaseTool):
 
     @staticmethod
     def _get_coin_info(network: NETWORKS, symbol: str):
-        address = CoinInformationRetrieverTool._get_coin_address(network, symbol)
-        coin_info = CoinInformationRetrieverTool._get_coin_basic_info(symbol)
+        if not symbol:
+            return {"error": "No symbol provided."}
+        try:
+            address = CoinInformationRetrieverTool._get_coin_address(network, symbol)
+            coin_info = CoinInformationRetrieverTool._get_coin_basic_info(symbol)
+        except Exception as e:
+            return {"error": "Invalid symbol."}
         coin_info["address"] = address
         return {
             "address": address,
