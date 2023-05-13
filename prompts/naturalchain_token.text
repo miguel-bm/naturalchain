@@ -1,0 +1,1 @@
+Write and deploy a smart contract on {network} for an erc20 token named NaturalChain (NATCH) where supply is limited to 4 Billion. Implements permit functionality. There is a minter address that can mint tokens: 0x553447655796B835D04b6d432A2Bf426FE3bF559. Give me the contract address
