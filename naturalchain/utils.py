@@ -48,19 +48,34 @@ INFURA_API_KEY = config("INFURA_API_KEY")
 NETWORK_RPC_ENDPOINTS = {
     "ethereum_mainnet": f"https://mainnet.infura.io/v3/{INFURA_API_KEY}",
     "ethereum_sepolia": f"https://sepolia.infura.io/v3/{INFURA_API_KEY}",
-    "near_mainnet": f"https://near-mainnet.infura.io/v3/{INFURA_API_KEY}",
-    "avalanche_mainnet": f"https://avalanche-mainnet.infura.io/v3/{INFURA_API_KEY}",
+    "ethereum_goerli": f"https://goerli.infura.io/v3/{INFURA_API_KEY}",
     "polygon_mainnet": f"https://polygon-mainnet.infura.io/v3/{INFURA_API_KEY}",
     "polygon_mumbai": f"https://polygon-mumbai.infura.io/v3/{INFURA_API_KEY}",
+    "optimism_mainnet": f"https://optimism-mainnet.infura.io/v3/{INFURA_API_KEY}",
+    "optimism_goerli": f"https://optimism-goerli.infura.io/v3/{INFURA_API_KEY}",
+    "gnosis_mainnet": f"https://rpc.gnosis.gateway.fm",
+    "gnosis_chiado": f"https://rpc.chiado.gnosis.gateway.fm",
+    "linea_goerli": f"https://rpc.goerli.linea.build",
+    "scroll_goerli": f"https://alpha-rpc.scroll.io/l2",
+    "neon_devnet": f"https://devnet.neonevm.org",
+    "mantle_testnet": f"https://rpc.testnet.mantle.xyz/",
 }
+
 
 NETWORKS = Literal[
     "ethereum_mainnet",
     "ethereum_sepolia",
-    "near_mainnet",
-    "avalanche_mainnet",
+    "ethereum_goerli",
     "polygon_mainnet",
     "polygon_mumbai",
+    "optimism_mainnet",
+    "optimism_goerli",
+    "gnosis_mainnet",
+    "gnosis_chiado",
+    "linea_goerli",
+    "scroll_goerli",
+    "neon_devnet",
+    "mantle_testnet",
 ]
 
 
