@@ -11,7 +11,7 @@ from naturalchain.utils import NETWORKS, camel_to_snake, get_web3
 
 class RPCTool(BaseTool):
     name = "RPC"
-    description = "Useful for getting data with RPC"
+    description = "Useful for getting data with RPC. This does not give you information about address, name, symbol, token_supply or price"
 
     def _get_method(self, payload: dict) -> tuple[str, str]:
         # The payload method should be something like "eth_call" or "eth_getBalance"
