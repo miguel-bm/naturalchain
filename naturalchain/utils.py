@@ -49,10 +49,10 @@ NETWORK_RPC_ENDPOINTS = {
     "avalanche_mainnet": f"https://avalanche-mainnet.infura.io/v3/{INFURA_API_KEY}",
 }
 
-NETWORKS = Literal[tuple(NETWORK_RPC_ENDPOINTS.keys())]  # type: ignore
+NETWORKS = Literal["ethereum_mainnet", "near_mainnet", "avalanche_mainnet"]
 
 
-def get_web3(network: str) -> Web3:
+def get_web3(network: NETWORKS) -> Web3:
     try:
         endpoint = NETWORK_RPC_ENDPOINTS[network]
         return Web3(Web3.HTTPProvider(endpoint))
