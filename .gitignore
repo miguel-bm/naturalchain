@@ -163,3 +163,4 @@ cython_debug/
 poetry.lock
 .vscode/
 smart_contracts/
+backup/
