@@ -1,13 +1,13 @@
 import json
 from pathlib import Path
-from typing import Optional, Type
+from typing import Dict, List, Optional, Type
 
 import solcx
 from langchain.callbacks.manager import CallbackManagerForToolRun
 from langchain.tools import BaseTool
 from pydantic import BaseModel, Field
-from typing import List, Dict
 from semantic_version import Version
+from solcx.exceptions import SolcError
 
 
 def get_remappings(
@@ -61,12 +61,15 @@ class SmartContractCompilerTool(BaseTool):
     ) -> str:
         # Read the Solidity source code
         home_path = Path.home()
-        compiler_output = solcx.compile_files(
-            [path_to_sol_file],
-            output_values=["abi", "bin"],
-            import_remappings=get_remappings(["openzeppelin", "chainlink"]),
-            solc_version=Version("0.8.19"),
-        )
+        try:
+            compiler_output = solcx.compile_files(
+                [path_to_sol_file],
+                output_values=["abi", "bin"],
+                import_remappings=get_remappings(["openzeppelin", "chainlink"]),
+                solc_version=Version("0.8.19"),
+            )
+        except SolcError as e:
+            return str(e)
 
         sol_file_name = Path(path_to_sol_file).name
         main_contract = find_main_contract(compiler_output, sol_file_name)

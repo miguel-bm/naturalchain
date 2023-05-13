@@ -7,13 +7,16 @@ readme = "README.md"
 packages = [{include = "naturalchain"}]
 
 [tool.poetry.dependencies]
-python = "~3.9"
+python = "~3.9.8"
 eth-brownie = "^1.19.3"
 langchain = "^0.0.160"
 openai = "^0.27.6"
 python-decouple = "^3.8"
 py-solc-x = "^1.1.1"
 typer = {extras = ["all"], version = "^0.9.0"}
+streamlit = "1.22.0"
+streamlit-chat = "0.0.2.2"
+streamlit-extras = "0.2.7"
 
 [tool.poetry.group.dev.dependencies]
 ipynb = "^0.5.1"
