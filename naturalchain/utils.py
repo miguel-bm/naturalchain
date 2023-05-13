@@ -23,6 +23,9 @@ def preprocess_solidity_code(code: str) -> str:
     )
     code = code.replace("pragma solidity 0.8.9;", "pragma solidity 0.8.19;")
     code = code.replace("pragma solidity ^0.8.0;", "pragma solidity 0.8.19;")
+    code = code.replace(
+        "ERC20/extensions/ERC20Permit.sol", "ERC20/extensions/draft-ERC20Permit.sol"
+    )
     return code
 
 
@@ -61,6 +64,21 @@ NETWORK_RPC_ENDPOINTS = {
     "mantle_testnet": f"https://rpc.testnet.mantle.xyz/",
 }
 
+CMC_NETWORK_NAMES = {
+    "ethereum_mainnet": "Ethereum",
+    "ethereum_sepolia": "Ethereum Sepolia",
+    "ethereum_goerli": "Ethereum Goerli",
+    "polygon_mainnet": "Polygon",
+    "polygon_mumbai": "Polygon Mumbai",
+    "optimism_mainnet": "Optimism Mainnet",
+    "optimism_goerli": "Optimism Goerli",
+    "gnosis_mainnet": "Gnosis",
+    "gnosis_chiado": "Gnosis Chiado",
+    "linea_goerli": "Linea Goerli",
+    "scroll_goerli": "Scroll",
+    "neon_devnet": "Neon Devnet",
+    "mantle_testnet": "Mantle Testnet",
+}
 
 NETWORKS = Literal[
     "ethereum_mainnet",
