@@ -12,6 +12,7 @@ eth-brownie = "^1.19.3"
 langchain = "^0.0.160"
 openai = "^0.27.6"
 python-decouple = "^3.8"
+py-solc-x = "^1.1.1"
 
 [tool.poetry.group.dev.dependencies]
 ipynb = "^0.5.1"
