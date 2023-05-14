@@ -58,7 +58,7 @@ RETRIEVAL_TOOLSET = [
 FULL_TOOLSET = [
     *SMART_CONTRACT_TOOLSET,
     *RETRIEVAL_TOOLSET,
-    #  SignTransactionTool(),
+     SignTransactionTool(),
 ]
 TOOLSET_MAP = {
     StructuredChatAgent.full: FULL_TOOLSET,
