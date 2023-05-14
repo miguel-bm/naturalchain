@@ -12,7 +12,7 @@ from naturalchain.utils import NETWORKS, camel_to_snake, get_web3
 
 class RPCToolInput(BaseModel):
     network: NETWORKS = Field(description="Network to use for the RPC.")
-    payload: str = Field(description="Payload for the RPC in json format.")
+    payload: str = Field(description="JSON payload for the RPC call.")
 
 
 class RPCTool(BaseTool):

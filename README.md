@@ -30,13 +30,14 @@
 
 
     - Deploy an nft contract on Sepolia, ask any questions about the process
-    - Create an erc20 dnd oriented on Sepolia, ask any questions about the process
-        - Send a transaction to interact with this erc20 contract 0x2d8De0cC5775aBB07a3994556Cfb15db08f7A17b to transfer 25 tokens to this address 0xf904C9Be6884263606BC9C41fb17b16D4c692C02 on Sepolia
+    - Create an erc20 dnd oriented onSepolia, ask any questions about the process
+        - Send a transaction to interact with this erc20 contract 0x7484e7449Ca8b3c9807E191b9A7E75319daa1Af4 to transfer 25 tokens to this address 0xf904C9Be6884263606BC9C41fb17b16D4c692C02 on Sepolia
 
 - Querying subgraph
     - Can you provide me the top 10 paris of uniswap?
     - Can you provide me the top 5 uniswap pairs that has DAI on it
     - Show top pairs of balancer
+    - Can you provide me the top 5 paris of uniswap and provide the reserved of USD of each one?
 
 - Leverage the full JSON-rpc
     - Send 0.01 ether to this address 0xf904C9Be6884263606BC9C41fb17b16D4c692C02 on Sepolia
