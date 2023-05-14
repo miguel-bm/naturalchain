@@ -1,0 +1,6 @@
+version: '3'
+services:
+  natural_chain:
+    build: .
+    env_file:
+      - .env

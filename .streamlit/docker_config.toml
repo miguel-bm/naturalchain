@@ -1,0 +1,9 @@
+[runner]
+fastReruns = true
+
+[server]
+fileWatcherType = "none"
+headless = true
+
+[client]
+showErrorDetails = false
