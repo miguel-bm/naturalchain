@@ -22,9 +22,19 @@ with st.sidebar:
     st.markdown(
         """
     ## About
-    The code for the project is available at:
-    - [Github](https://github.com/miguel-bm/naturalchain/)
-    """
+
+    **NaturalChain** provides a <u>bridge</u> between them, allowing humans to interact with the blockchain using their natural language
+
+    Interact with the **EVM ecosystem** using **natural language**
+
+    - Write & Deploy Smart Contracts to any EVM chain
+    - Query subgraphs from The Graph
+    - Leverage the full JSON-RPC API
+
+    And much more!
+    
+    """,
+        unsafe_allow_html=True,
     )
     add_vertical_space(5)
 
@@ -89,3 +99,14 @@ with input_container:
     user_input = get_text()
     if user_input:
         st.session_state["max_messages"] = 5
+
+st.markdown(
+    """
+  <style>
+    .css-13sdm1b.e16nr0p33 {
+      margin-top: -75px;
+    }
+  </style>
+""",
+    unsafe_allow_html=True,
+)

@@ -53,12 +53,12 @@ RETRIEVAL_TOOLSET = [
     RPCTool(),
     IdentifyContractTool(),
     CoinInformationRetrieverTool(),
-    UniswapGraphTool()
+    UniswapGraphTool(),
 ]
 FULL_TOOLSET = [
     *SMART_CONTRACT_TOOLSET,
     *RETRIEVAL_TOOLSET,
-     SignTransactionTool(),
+    #  SignTransactionTool(),
 ]
 TOOLSET_MAP = {
     StructuredChatAgent.full: FULL_TOOLSET,
