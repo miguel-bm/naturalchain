@@ -6,7 +6,7 @@ from streamlit_extras.colored_header import colored_header
 
 from naturalchain.cli.main import StructuredChatAgent, get_agent
 
-st.set_page_config(page_title="HugChat - An LLM-powered Streamlit app")
+st.set_page_config(page_title="NaturalChain", page_icon="assets/logo.png")
 
 if "agent" not in st.session_state:
     st.session_state["agent"] = get_agent(
