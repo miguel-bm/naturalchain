@@ -52,8 +52,8 @@ def signTransaction(
 
 
 class SignTransactionToolInput(BaseModel):
-    smart_contract_address: str = Field(
-        description="Smart contract address, can be the destination address if it's not a smart contract"
+    destination_address: str = Field(
+        description="Destination address"
     )
     value: str = Field(description="Ether value of in weis")
     data: str = Field(description="Data of the ethereum transaction")
@@ -64,19 +64,19 @@ class SignTransactionToolInput(BaseModel):
 
 class SignTransactionTool(BaseTool):
     name = "Signer tool"
-    description = "Useful for sending transactions given a smart contract address, ether value, data and network to interact with. Return the receipt"
+    description = "Useful for sending transactions given a destination address, ether value, data and network to interact with. Return the receipt"
 
     args_schema: Type[BaseModel] = SignTransactionToolInput
 
     def _run(
         self,
-        smart_contract_address: str,
+        destination_address: str,
         value: str,
         data: str,
         network: NETWORKS,
     ) -> str:
         w3 = get_web3(network)
-        checksum_address = w3.toChecksumAddress(smart_contract_address)
+        checksum_address = w3.toChecksumAddress(destination_address)
         transaction_receipt = signTransaction(w3, checksum_address, int(value), data)
 
         # Check the transaction status
