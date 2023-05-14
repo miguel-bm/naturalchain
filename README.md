@@ -34,8 +34,8 @@
         - Send a transaction to interact with this erc20 contract 0x7484e7449Ca8b3c9807E191b9A7E75319daa1Af4 to transfer 25 tokens to this address 0xf904C9Be6884263606BC9C41fb17b16D4c692C02 on Sepolia
 
 - Querying subgraph
-    - Can you provide me the top 10 paris of uniswap?
-    - Can you provide me the top 5 uniswap pairs that has DAI on it
+    - Can you provide me the top 10 pairs of uniswap?
+    - Can you provide me the top 5 uniswap pairs that have DAI on it?
     - Show top pairs of balancer
     - Can you provide me the top 5 paris of uniswap and provide the reserved of USD of each one?
 
