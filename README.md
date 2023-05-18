@@ -10,7 +10,7 @@ NaturalChain was originally developed for the ETHGlobal Lisbon 2023 hackathon by
 
 ## Features
 
-NaturalChain extends [LangChain](https://github.com/hwchase17/langchain). It uncludes tools includes that allow an AI agent to:
+NaturalChain extends [LangChain](https://github.com/hwchase17/langchain). It uncludes tools that allow an AI agent to:
 
 - Utilize the full JSON-RPC API from an EVM-compatible chain.
 - Sign transactions
@@ -36,6 +36,10 @@ git clone https://github.com/miguel-bm/naturalchain.git
 cd naturalchain
 
 poetry install
+
+npm i @openzeppelin/contracts@4.8.3
+
+poetry run python -c "import solcx; solcx.install_solc('0.8.19')"
 
 poetry shell
 ```
