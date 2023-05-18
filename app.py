@@ -32,6 +32,8 @@ with st.sidebar:
     - Leverage the full JSON-RPC API
 
     And much more!
+
+    [Github Page](https://github.com/miguel-bm/naturalchain)
     
     """,
         unsafe_allow_html=True,
@@ -41,7 +43,7 @@ with st.sidebar:
 # Generate empty lists for generated and past.
 ## generated stores AI generated responses
 if "generated" not in st.session_state:
-    st.session_state["generated"] = ["I'm NaturalChain, how may I help you?"]
+    st.session_state["generated"] = ["Hi! I'm NaturalChain, how may I help you?"]
 ## past stores User's questions
 if "past" not in st.session_state:
     st.session_state["past"] = ["Hi!"]
@@ -51,6 +53,7 @@ older_messages_container = st.container()
 colored_header(label="", description="", color_name="blue-30")
 response_container = st.container()
 input_container = st.container()
+
 
 # User input
 ## Function for taking user provided prompt as input
